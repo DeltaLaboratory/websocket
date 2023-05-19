@@ -5,7 +5,6 @@
 package websocket
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"sync"
@@ -309,17 +308,21 @@ const (
 	PongMessage = 10
 )
 
-// ErrBadHandshake is returned when the server response to opening handshake is
-// invalid.
-var ErrBadHandshake = errors.New("websocket: bad handshake")
-
-// ErrCloseSent is returned when the application writes a message to the
-// connection after sending a close message.
-var ErrCloseSent = errors.New("websocket: close sent")
-
-// ErrReadLimit is returned when reading a message that is larger than the
-// read limit set for the connection.
-var ErrReadLimit = errors.New("websocket: read limit exceeded")
+var (
+	// ErrBadHandshake is returned when the server response to opening handshake is
+	// invalid.
+	ErrBadHandshake = websocket.ErrBadHandshake
+	// ErrCloseSent is returned when the application writes a message to the
+	// connection after sending a close message.
+	ErrCloseSent = websocket.ErrCloseSent
+	// ErrReadLimit is returned when reading a message that is larger than the
+	// read limit set for the connection.
+	ErrReadLimit = websocket.ErrReadLimit
+	// ErrNilConn is returned when connection have nil connection
+	ErrNilConn = websocket.ErrNilConn
+	// ErrNilNetConn is returned when connection have nil net.conn
+	ErrNilNetConn = websocket.ErrNilNetConn
+)
 
 // FormatCloseMessage formats closeCode and text as a WebSocket close message.
 // An empty message is returned for code CloseNoStatusReceived.
